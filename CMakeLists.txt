@@ -22,7 +22,10 @@ add_subdirectory(thirdparty/imgui-docking)		#ui
 file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/CrockEngine/*.cpp")
 
 
-add_executable("${CMAKE_PROJECT_NAME}")
+add_executable("${CMAKE_PROJECT_NAME}"
+		src/CrockEngine/utils/FileUtils.h
+		src/CrockEngine/graphics/Shader.cpp
+		src/CrockEngine/graphics/Shader.h)
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
 

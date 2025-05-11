@@ -323,7 +323,7 @@ struct Vec4 {
         return this->substract(another);
     }
 
-    Vec4& operator*=(const Vec4& another) {
+    Vec4& operator*=(const Vec4& another) { // TODO
         return this->multiply(another);
     }
 
@@ -603,12 +603,42 @@ struct Matrix4 {
         return res;
     }
 
+
+    friend std::ostream& operator<<(std::ostream& os, Matrix4<T>& matrix) {
+        for (int i = 0; i < 16; i++) {
+            os << matrix.data[i] << " ";
+            if ((i + 1) % 4 == 0 ) os << std::endl;
+        }
+        return os;
+    }
+
     // TODO
     T det() {
         T a = data[0] * (data[4] * data[8] - data[5] * data[7]);
         T b = data[1] * (data[3] * data[8] - data[5] * data[6]);
         T c = data[2] * (data[3] * data[7] - data[4] * data[6]);
         return a - b + c;
+    }
+
+    Vec4<T> getColumn(uint8_t col) {
+        if (col >= 4) return Vec4<T>(0, 0, 0, 0);
+        return Vec4<T>(
+            data[col * 4 + 0],
+            data[col * 4 + 1],
+            data[col * 4 + 2],
+            data[col * 4 + 3]
+        );
+    }
+
+    Vec4<T> getRow(uint8_t row) {
+        if (row >= 4) return Vec4<T>(0, 0, 0, 0);
+
+        return Vec4<T>(
+            data[0 * 4 + row],
+            data[1 * 4 + row],
+            data[2 * 4 + row],
+            data[3 * 4 + row]
+        );
     }
 
     static Matrix4 orthographic(float left, float right, float bottom, float top, float near, float far) { // to rep a 3D obj en 2D obj
@@ -666,8 +696,29 @@ struct Matrix4 {
         return res;
     }
 
-    static Matrix4 rotation(float angle, Vec3<T>& axe) {
+    static Matrix4 rotation(float angle, Vec3<T>& axes) { // (1, 0, 0) for X, (0, 0, 1) for z etc
+        Matrix4 res(1);
+        float r = deg_to_rad(angle);
+        float s = sin(r);
+        float c = cos(r);
 
+        float x = axes.x;
+        float y = axes.y;
+        float z = axes.z;
+
+        res.data[0 + 0 * 4] = x * x * (1.0 - c) + c;
+        res.data[1 + 0 * 4] = y * x * (1.0 - c) + z * s;
+        res.data[2 + 0 * 4] = z * x * (1.0 - c) - y * s;
+
+        res.data[0 + 1 * 4] = x * y * (1.0 - c) - z * s;
+        res.data[1 + 1 * 4] = y * y *  (1.0 - c) + c;
+        res.data[2 + 1 * 4] = z * y * (1.0 - c) + x * s;
+
+        res.data[0 + 2 * 4] = x * z * (1.0 - c) + y * s;
+        res.data[1 + 2 * 4] = y * z * (1.0 - c) - x * s;
+        res.data[2 + 2 * 4] = z * z * (1.0 - c) + s;
+
+        return res;
     }
 
 
