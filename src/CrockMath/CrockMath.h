@@ -3,6 +3,15 @@
 #include <cstring>
 #include <cmath>
 
+#define pi 3.141592653589793
+
+struct Utils {
+    static float deg_to_radians(float deg){
+        return deg * pi * 1 / 180;
+    }
+};
+
+
 
 /*
 =====================================================================================
@@ -641,27 +650,24 @@ struct Matrix4 {
         );
     }
 
+
     static Matrix4 orthographic(float left, float right, float bottom, float top, float near, float far) { // to rep a 3D obj en 2D obj
-        Matrix4 res(nullptr);
-        res.data[0] = 2.0 / (right - left);
-        res.data[5] = 2.0 / (top - bottom);
-        res.data[10] = -2 / (far - near);
-        res.data[15] = 1;
+        Matrix4 res(0);
+        res.data[0] = 2.0f / (right - left);
+        res.data[5] = 2.0f / (top - bottom);
+        res.data[10] = -2.0f / (far - near);
+        res.data[15] = 1.0f;
 
-        res.data[3] = -(right + left) / (right - left);
-        res.data[7] = -(top + bottom) / (top - bottom);
-        res.data[11] = -(far + near) / (far - near);
-    }
+        res.data[12] = -(right + left) / (right - left);
+        res.data[13] = -(top + bottom) / (top - bottom);
+        res.data[14] = -(far + near) / (far - near);
 
-#define pi 3,141592653589793 
-
-    float deg_to_rad(float deg){
-        return deg * pi * 1 / 180;
+        return res;
     }
 
     static Matrix4 perspective(float fov, float aspectRatio, float near, float far) {
         Matrix4 res(1.0);
-        float q = 1.0 / tan(deg_to_rad(fov) / 2.0f);
+        float q = 1.0 / tan(Utils::deg_to_radians(fov) / 2.0f);
         float a = q / aspectRatio;
 
         float b = (near + far) / (near - far);
@@ -674,10 +680,6 @@ struct Matrix4 {
         res.data[2 + 3 * 4] = -1;
 
         return res;
-
-
-
-        
     }
 
     static Matrix4 translation(Vec3<T>& vec) {
@@ -696,9 +698,9 @@ struct Matrix4 {
         return res;
     }
 
-    static Matrix4 rotation(float angle, Vec3<T>& axes) { // (1, 0, 0) for X, (0, 0, 1) for z etc
+    static Matrix4 rotation(float angle, Vec3<T> axes) { // (1, 0, 0) for X, (0, 0, 1) for z etc
         Matrix4 res(1);
-        float r = deg_to_rad(angle);
+        float r = Utils::deg_to_radians(angle);
         float s = sin(r);
         float c = cos(r);
 

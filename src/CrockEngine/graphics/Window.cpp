@@ -65,6 +65,7 @@ bool Window::init() {
 		std::cout << "Failed to create a window" << std::endl;
 		return false;
 	}
+	glfwWindowHint( GLFW_SAMPLES, 8 );
 
 	glfwMakeContextCurrent(_window);
 	glfwSetFramebufferSizeCallback(_window, resize);

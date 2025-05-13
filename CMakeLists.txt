@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.16)
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>") #we want to use the static runtime
 set(CMAKE_MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Release>:Release>")
 
-project(mygame)
+project(Crock)
 
 set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
@@ -25,7 +25,16 @@ file(GLOB_RECURSE MY_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/
 add_executable("${CMAKE_PROJECT_NAME}"
 		src/CrockEngine/utils/FileUtils.h
 		src/CrockEngine/graphics/Shader.cpp
-		src/CrockEngine/graphics/Shader.h)
+		src/CrockEngine/graphics/Shader.h
+		src/CrockEngine/graphics/buffers/Buffer.cpp
+		src/CrockEngine/graphics/buffers/Buffer.h
+		src/CrockEngine/graphics/Renderer.cpp
+		src/CrockEngine/graphics/Renderer.h
+		src/CrockEngine/graphics/buffers/VertexBuffer.cpp
+		src/CrockEngine/graphics/buffers/VertexBuffer.h
+		src/CrockEngine/graphics/buffers/IndexBuffer.cpp
+		src/CrockEngine/graphics/buffers/IndexBuffer.h
+		src/CrockEngine/main.cpp)
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
 
