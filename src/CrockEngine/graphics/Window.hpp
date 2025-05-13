@@ -2,8 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include <iostream>
-
-
+#include "../../CrockMath/CrockMath.h"
 #define MAX_KEYS 1024
 #define MAX_MOUSE_BUTTONS 10
 
@@ -34,7 +33,7 @@ public:
 	void update();
 	bool isKeyPressed(unsigned int keycode);
 	bool isMousePressed(unsigned int button);
-	void printMousePos();
+	Vec2<float> getMousePos();
 
 
 

@@ -122,6 +122,6 @@ void Window::resetInput() {
 	}
 }
 
-void Window::printMousePos() {
-	std::cout << mouseX << ", " << mouseY << std::endl;
+Vec2<float> Window::getMousePos() {
+	return Vec2<float>(mouseX, mouseY);
 }

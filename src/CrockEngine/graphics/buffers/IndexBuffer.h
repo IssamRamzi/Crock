@@ -11,7 +11,7 @@ class IndexBuffer {
     GLuint _bufferID;
     GLuint _count;
 public:
-    IndexBuffer(GLuint *data, GLsizei count, GLuint countComponents);
+    IndexBuffer(GLuint *data, GLuint count);
 
     void bind();
     void unbind();

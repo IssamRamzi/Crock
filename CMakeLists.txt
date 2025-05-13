@@ -30,8 +30,8 @@ add_executable("${CMAKE_PROJECT_NAME}"
 		src/CrockEngine/graphics/buffers/Buffer.h
 		src/CrockEngine/graphics/Renderer.cpp
 		src/CrockEngine/graphics/Renderer.h
-		src/CrockEngine/graphics/buffers/VertexBuffer.cpp
-		src/CrockEngine/graphics/buffers/VertexBuffer.h
+		src/CrockEngine/graphics/buffers/VertexArray.cpp
+		src/CrockEngine/graphics/buffers/VertexArray.h
 		src/CrockEngine/graphics/buffers/IndexBuffer.cpp
 		src/CrockEngine/graphics/buffers/IndexBuffer.h
 		src/CrockEngine/main.cpp)
