@@ -21,7 +21,7 @@ public:
     VertexArray();
     ~VertexArray();
 
-    void addBuffer(Buffer* buffer, GLuint index);
+    void addBuffer(Buffer* buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset);
     void bind();
     void unbind();
 };

@@ -15,12 +15,12 @@ VertexArray::~VertexArray(){
     }
 }
 
-void VertexArray::addBuffer(Buffer *buffer, GLuint index){
+void VertexArray::addBuffer(Buffer *buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset){
     bind();
     buffer->bind();
 
     glEnableVertexAttribArray(index);
-    glVertexAttribPointer(index, buffer->getCountComponent(), GL_FLOAT, GL_FALSE, 0, 0);
+    glVertexAttribPointer(index, componentsCount, GL_FLOAT, GL_FALSE, stride, offset);
     _buffers.emplace_back(buffer);
 
     buffer->unbind();

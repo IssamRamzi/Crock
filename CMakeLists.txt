@@ -34,7 +34,9 @@ add_executable("${CMAKE_PROJECT_NAME}"
 		src/CrockEngine/graphics/buffers/VertexArray.h
 		src/CrockEngine/graphics/buffers/IndexBuffer.cpp
 		src/CrockEngine/graphics/buffers/IndexBuffer.h
-		src/CrockEngine/main.cpp)
+		src/CrockEngine/main.cpp
+		src/CrockEngine/graphics/Texture2D.cpp
+		src/CrockEngine/graphics/Texture2D.h)
 
 set_property(TARGET "${CMAKE_PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
 

@@ -40,7 +40,6 @@ Window::Window(char* title, int width, int height) {
 	for (int i = 0; i < MAX_MOUSE_BUTTONS; i++) {
 		_mouseButtons[i] = false;
 	}
-
 }
 
 Window::~Window() {

@@ -1,10 +1,15 @@
 #version 330 core
+layout (location = 0) in vec3 aPos; // the position variable has attribute position 0
+layout (location = 1) in vec2 aTexCoord;
 
-layout(location = 0) in vec4 position;
-uniform mat4 pr_matrix;
-uniform mat4 vw_matrix = mat4(1.0);
-uniform mat4 ml_matrix = mat4(1.0);
+out vec2 TexCoord;
 
-void main(){
-    gl_Position = position;
+uniform float Xoffset;
+
+
+
+void main()
+{
+    gl_Position = vec4(aPos.x + Xoffset, -aPos.y, aPos.z, 1.0); // see how we directly give a vec3 to vec4's constructor
+    TexCoord = aTexCoord;
 }

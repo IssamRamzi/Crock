@@ -5586,7 +5586,7 @@ GLAPI PFNGLTEXTUREPARAMETERFVPROC glad_glTextureParameterfv;
 #define glTextureParameterfv glad_glTextureParameterfv
 typedef void (APIENTRYP PFNGLTEXTUREPARAMETERIPROC)(GLuint texture, GLenum pname, GLint param);
 GLAPI PFNGLTEXTUREPARAMETERIPROC glad_glTextureParameteri;
-#define glTextureParameteri glad_glTextureParameteri
+#define glTexParameteriglTextureParameteri glad_glTextureParameteri
 typedef void (APIENTRYP PFNGLTEXTUREPARAMETERIIVPROC)(GLuint texture, GLenum pname, const GLint *params);
 GLAPI PFNGLTEXTUREPARAMETERIIVPROC glad_glTextureParameterIiv;
 #define glTextureParameterIiv glad_glTextureParameterIiv

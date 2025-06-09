@@ -23,7 +23,7 @@ private:
 	double mouseX, mouseY;
 
 public:
-	Window(char* title, int height, int width);
+	Window(char* title, int width, int height);
 	~Window();
 	
 
