@@ -2,52 +2,51 @@
 
 void resize(GLFWwindow* window, int width, int height);
 
-//bool Window::_keys[MAX_KEYS];
-//bool Window::_mouseButtons[MAX_MOUSE_BUTTONS];
-//double Window::mouseX, Window::mouseY;
+//bool Window::m_keys[MAX_KEYS];
+//bool Window::m_mouseButtons[MAX_MOUSE_BUTTONS];
+//double Window::m_mouseX, Window::m_mouseY;
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 	Window* currentWIndow = (Window *) glfwGetWindowUserPointer(window);
 	if (key >= 0 && key < MAX_KEYS)
-		currentWIndow->_keys[key] = (action != GLFW_RELEASE);
+		currentWIndow->m_keys[key] = (action != GLFW_RELEASE);
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
 	Window* currentWIndow = (Window*)glfwGetWindowUserPointer(window);
 	if (button >= 0 && button < MAX_MOUSE_BUTTONS) {
-		currentWIndow->_mouseButtons[button] = (action != GLFW_RELEASE);
+		currentWIndow->m_mouseButtons[button] = (action != GLFW_RELEASE);
 	}
 }
 
 void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	Window* currentWIndow = (Window*)glfwGetWindowUserPointer(window);
-	currentWIndow->mouseX = xpos;
-	currentWIndow->mouseY = ypos;
+	currentWIndow->m_mouseX = xpos;
+	currentWIndow->m_mouseY = ypos;
 }
 
 
-Window::Window(char* title, int width, int height) {
-	_title = title;
-	_height = height;
-	_width = width;
+Window::Window(std::string title, int width, int height) {
+	m_title = title;
+	m_height = height;
+	m_width = width;
 
-	init();
 
 	for (int i = 0; i < MAX_KEYS; i++) {
-		_keys[i] = false;
+		m_keys[i] = false;
 	}
 	for (int i = 0; i < MAX_MOUSE_BUTTONS; i++) {
-		_mouseButtons[i] = false;
+		m_mouseButtons[i] = false;
 	}
 }
 
 Window::~Window() {
-	glfwDestroyWindow(_window);
+	glfwDestroyWindow(m_window);
 	glfwTerminate();
 }
 
-bool Window::init() {
+bool Window::Init() {
 
 	if (!glfwInit()) {
 		std::cerr << "Failed to initialize GLFW !" << std::endl;
@@ -55,38 +54,35 @@ bool Window::init() {
 	}else {
 		std::cout << "Success initializing GLFW" << std::endl;
 	}
-
-
-
-	_window = glfwCreateWindow(_width, _height, _title, NULL, NULL);
-	if (!_window) {
+	m_window = glfwCreateWindow(m_width, m_height, m_title.c_str(), NULL, NULL);
+	if (!m_window) {
 		glfwTerminate();
 		std::cout << "Failed to create a window" << std::endl;
 		return false;
 	}
 	glfwWindowHint( GLFW_SAMPLES, 8 );
-
-	glfwMakeContextCurrent(_window);
-	glfwSetFramebufferSizeCallback(_window, resize);
-	glfwSetKeyCallback(_window, key_callback);
-	glfwSetMouseButtonCallback(_window, mouse_button_callback);
-	glfwSetCursorPosCallback(_window, cursor_position_callback);
+	glfwMakeContextCurrent(m_window);
+	glfwSetFramebufferSizeCallback(m_window, resize);
+	glfwSetKeyCallback(m_window, key_callback);
+	glfwSetMouseButtonCallback(m_window, mouse_button_callback);
+	glfwSetCursorPosCallback(m_window, cursor_position_callback);
 
 	if (!gladLoadGL()) {
 		std::cerr << "Failed to initialize GLAD!" << std::endl;
 		return false;
 	}
 
-	glfwSetWindowUserPointer(_window, this);
+	glfwSetWindowUserPointer(m_window, this);
 
 	return true;
 }
 
-bool Window::closed() const{
-	return glfwWindowShouldClose(_window);
+bool Window::Closed() const{
+	return glfwWindowShouldClose(m_window);
 }
 
-void Window::clear() {
+void Window::ClearColor(int r, int g, int b, int a) {
+    glClearColor((float)r / 255,(float)g / 255,(float)b / 255,(float)a / 255);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
 
@@ -94,33 +90,33 @@ void resize(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 
-void Window::update() {
+void Window::Update() {
 	glfwPollEvents();
-	glfwGetFramebufferSize(_window, &_width, &_height);
-	glfwSwapBuffers(_window);
+	glfwGetFramebufferSize(m_window, &m_width, &m_height);
+	glfwSwapBuffers(m_window);
 }
 
 
 
-bool Window::isKeyPressed(unsigned int keycode) {
+bool Window::IsKeyPressed(unsigned int keycode) {
 	if (keycode > MAX_KEYS) return false;
-	else return _keys[keycode];
+	else return m_keys[keycode];
 }
 
-bool Window::isMousePressed(unsigned int button) {
+bool Window::IsMousePressed(unsigned int button) {
 	if (button >= MAX_MOUSE_BUTTONS) return false;
-	return _mouseButtons[button];
+	return m_mouseButtons[button];
 }
 
 void Window::resetInput() {
 	for (int i = 0; i < MAX_KEYS; i++) {
-		_keys[i] = false;
+		m_keys[i] = false;
 	}
 	for (int i = 0; i < MAX_MOUSE_BUTTONS; i++) {
-		_mouseButtons[i] = false;
+		m_mouseButtons[i] = false;
 	}
 }
 
-Vec2<float> Window::getMousePos() {
-	return Vec2<float>(mouseX, mouseY);
+Vec2<float> Window::GetMousePos() {
+	return Vec2<float>(m_mouseX, m_mouseY);
 }

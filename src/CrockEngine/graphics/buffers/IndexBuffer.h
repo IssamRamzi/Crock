@@ -8,14 +8,14 @@
 
 
 class IndexBuffer {
-    GLuint _bufferID;
-    GLuint _count;
+    GLuint          m_bufferID;
+    GLuint          m_count;
 public:
     IndexBuffer(GLuint *data, GLuint count);
 
-    void bind();
-    void unbind();
-    inline GLuint getCount(){return _count;}
+    void            Bind();
+    void            Unbind();
+    inline GLuint   GetCount(){return m_count;}
 };
 
 

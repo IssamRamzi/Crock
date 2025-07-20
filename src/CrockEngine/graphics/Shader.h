@@ -8,33 +8,34 @@
 
 #include <glad/glad.h>
 #include "../../CrockMath/CrockMath.h"
+#include "glm/glm.hpp"
 
 class Shader {
 private:
-    GLuint _shaderID;
-
-    const char *_vertexPath, *_fragmentPath;
+    GLuint      m_shaderID;
+    const char  *m_vertexPath, *m_fragmentPath;
 
 public:
     Shader(const char* vertexPath, const char* fragmentPath);
     ~Shader();
 
-    void enableShader();
-    void disableShader();
-    GLuint getShaderID();
+    void        EnableShader();
+    void        DisableShader();
+    GLuint      GetShaderID();
+    GLint       GetUniformLoc(const GLchar *name);
 
-    GLint getUniformLoc(const GLchar *name);
 
-    void setUniformMat4(const GLchar *name, Matrix4<float> mat);
-    void setUniform1f(const GLchar* name, float val);
-    void setUniform2f(const GLchar* name, Vec2<float> vec);
-    void setUniform3f(const GLchar* name, Vec3<float> vec);
-    void setUniform4f(const GLchar* name, Vec4<float> vec);
-    void setUniform1i(const GLchar* name, int val);
-    void setUniform2i(const GLchar* name, Vec2<int> vec);
-    void setUniform3i(const GLchar* name, Vec3<int> vec);
-    void setUniform4i(const GLchar* name, Vec4<int> vec);
+    void        SetUniform1f(const GLchar* name, float val);
+    void        SetUniform2f(const GLchar* name, Vec2<float> vec);
+    void        SetUniform3f(const GLchar* name, Vec3<float> vec);
+    void        SetUniform4f(const GLchar* name, Vec4<float> vec);
+    void        SetUniform1i(const GLchar* name, int val);
+    void        SetUniform2i(const GLchar* name, Vec2<int> vec);
+    void        SetUniform3i(const GLchar* name, Vec3<int> vec);
+    void        SetUniform4i(const GLchar* name, Vec4<int> vec);
 
+    void        SetUniformMat4(const GLchar *name, Matrix4<float> mat);
+    void        SetUniformMat4GLM(const GLchar *name, glm::mat4 mat);
 };
 
 

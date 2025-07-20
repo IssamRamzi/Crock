@@ -9,15 +9,15 @@
 
 class Buffer {
 private:
-    GLuint _bufferID;
-    GLuint _countComponents;
+    GLuint          m_bufferID;
+    GLuint          m_countComponents;
 
 public:
     Buffer(GLfloat *data, GLsizei count, GLuint countComponents);
 
-    void bind();
-    void unbind();
-    inline GLuint getCountComponent(){return _countComponents;}
+    void            Bind();
+    void            Unbind();
+    inline GLuint   GetCountComponent(){return m_countComponents;}
 };
 
 

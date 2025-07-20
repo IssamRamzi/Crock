@@ -17,19 +17,19 @@ enum TextureType {
 
 class Texture2D {
 public:
-    Texture2D(const char* path, TextureType type);
+    Texture2D(const char* m_path);
     ~Texture2D();
 
-    TextureType type;
-    GLuint texture;
+    TextureType     m_type;
+    GLuint          m_texture;
 private:
-    char* path;
-    unsigned char* bytes;
-    int height, width, numColCh;
+    char*           m_path;
+    unsigned char*  m_bytes;
+    int             m_height, m_width, m_numColCh;
 
 public:
-    void bind(GLenum unit = GL_TEXTURE0);
-    void unbind();
+    void            Bind(GLenum unit = GL_TEXTURE0);
+    void            Unbind();
 
 };
 

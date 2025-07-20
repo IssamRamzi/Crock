@@ -2,12 +2,13 @@
 #include <iostream>
 #include <cstring>
 #include <cmath>
+#include <stdint.h>
 
-#define pi 3.141592653589793
+#define PI 3.141592653589793
 
-struct Utils {
+struct MathUtils {
     static float deg_to_radians(float deg){
-        return deg * pi * 1 / 180;
+        return deg * PI * 1 / 180;
     }
 };
 
@@ -667,7 +668,7 @@ struct Matrix4 {
 
     static Matrix4 perspective(float fov, float aspectRatio, float near, float far) {
         Matrix4 res(1.0);
-        float q = 1.0 / tan(Utils::deg_to_radians(fov) / 2.0f);
+        float q = 1.0 / tan(MathUtils::deg_to_radians(fov) / 2.0f);
         float a = q / aspectRatio;
 
         float b = (near + far) / (near - far);
@@ -700,7 +701,7 @@ struct Matrix4 {
 
     static Matrix4 rotation(float angle, Vec3<T> axes) { // (1, 0, 0) for X, (0, 0, 1) for z etc
         Matrix4 res(1);
-        float r = Utils::deg_to_radians(angle);
+        float r = MathUtils::deg_to_radians(angle);
         float s = sin(r);
         float c = cos(r);
 
@@ -722,6 +723,4 @@ struct Matrix4 {
 
         return res;
     }
-
-
 };

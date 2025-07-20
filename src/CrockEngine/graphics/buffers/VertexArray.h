@@ -13,17 +13,17 @@
 
 class VertexArray {
 private:
-    GLuint _arrayID;
+    GLuint                  m_arrayID;
 
-    std::vector<Buffer*> _buffers;
+    std::vector<Buffer*>    m_buffers;
 
 public:
     VertexArray();
     ~VertexArray();
 
-    void addBuffer(Buffer* buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset);
-    void bind();
-    void unbind();
+    void                    AddBuffer(Buffer* buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset);
+    void                    Bind();
+    void                    Unbind();
 };
 
 

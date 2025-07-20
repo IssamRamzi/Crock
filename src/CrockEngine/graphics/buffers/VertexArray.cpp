@@ -6,31 +6,29 @@
 
 
 VertexArray::VertexArray(){
-    glGenVertexArrays(1, &_arrayID);
+    glGenVertexArrays(1, &m_arrayID);
 }
 
 VertexArray::~VertexArray(){
-    for(int i =0; i < _buffers.size(); i++){
-        delete _buffers[i];
-    }
+    
 }
 
-void VertexArray::addBuffer(Buffer *buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset){
-    bind();
-    buffer->bind();
+void VertexArray::AddBuffer(Buffer *buffer, GLuint index, GLint componentsCount, GLint stride, const void* offset){
+    Bind();
+    buffer->Bind();
 
     glEnableVertexAttribArray(index);
     glVertexAttribPointer(index, componentsCount, GL_FLOAT, GL_FALSE, stride, offset);
-    _buffers.emplace_back(buffer);
+    m_buffers.emplace_back(buffer);
 
-    buffer->unbind();
-    unbind();
+    buffer->Unbind();
+    Unbind();
 }
 
-void VertexArray::bind(){
-    glBindVertexArray(_arrayID);
+void VertexArray::Bind(){
+    glBindVertexArray(m_arrayID);
 }
 
-void VertexArray::unbind(){
+void VertexArray::Unbind(){
     glBindVertexArray(0);
 }

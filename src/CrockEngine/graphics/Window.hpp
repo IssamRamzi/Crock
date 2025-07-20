@@ -11,40 +11,37 @@ class Window
 
 
 private:
-	int _height, _width;
-	char* _title;
+	int 			m_height, m_width;
+	std::string 	m_title;
 
-	GLFWwindow* _window;
-	bool _isclosed;
+	GLFWwindow* 	m_window;
+	bool 			m_isClosed;
 
 
-	bool _keys[MAX_KEYS];
-	bool _mouseButtons[MAX_MOUSE_BUTTONS];
-	double mouseX, mouseY;
+	bool 			m_keys[MAX_KEYS];
+	bool 			m_mouseButtons[MAX_MOUSE_BUTTONS];
+	double 			m_mouseX, m_mouseY;
 
 public:
-	Window(char* title, int width, int height);
+	Window(std::string title, int width, int height);
 	~Window();
 	
 
-	
-	void clear();
-	bool closed() const;
-	void update();
-	bool isKeyPressed(unsigned int keycode);
-	bool isMousePressed(unsigned int button);
-	Vec2<float> getMousePos();
+
+	bool 			Init();
+	void 			ClearColor(int r, int g, int b, int a);
+	bool 			Closed() const;
+	void 			Update();
+	bool 			IsKeyPressed(unsigned int keycode);
+	bool 			IsMousePressed(unsigned int button);
+	Vec2<float> 	GetMousePos();
 
 
 
-	friend void cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
-	friend void mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
-	friend void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
-
+	friend void 	cursor_position_callback(GLFWwindow* window, double xpos, double ypos);
+	friend void 	mouse_button_callback(GLFWwindow* window, int button, int action, int mods);
+	friend void 	key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 private:
-	bool init();
 
 	void resetInput();
-
 };
