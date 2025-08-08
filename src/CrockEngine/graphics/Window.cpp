@@ -26,6 +26,13 @@ void cursor_position_callback(GLFWwindow* window, double xpos, double ypos)
 	currentWIndow->m_mouseY = ypos;
 }
 
+void mouse_scroll_callback(GLFWwindow *window, double xoffset, double yoffset){
+	Window *currentWindow = (Window*)glfwGetWindowUserPointer(window);
+	currentWindow->m_mouseScroll +=yoffset;
+	if(currentWindow->m_mouseScroll < 0) currentWindow->m_mouseScroll = 0;
+	std::cout << "Scrolling : " << currentWindow->m_mouseScroll << std::endl;
+	
+}
 
 Window::Window(std::string title, int width, int height) {
 	m_title = title;
@@ -66,6 +73,7 @@ bool Window::Init() {
 	glfwSetKeyCallback(m_window, key_callback);
 	glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 	glfwSetCursorPosCallback(m_window, cursor_position_callback);
+	glfwSetScrollCallback(m_window, mouse_scroll_callback);
 
 	if (!gladLoadGL()) {
 		std::cerr << "Failed to initialize GLAD!" << std::endl;
@@ -73,6 +81,9 @@ bool Window::Init() {
 	}
 
 	glfwSetWindowUserPointer(m_window, this);
+	int max_height = 1080;
+	int max_width = 1920;
+	glfwSetWindowMonitor(m_window, NULL, (max_width/2)-(m_width/2), (max_height/2) - (m_height/2), m_width, m_height, GLFW_DONT_CARE);
 
 	return true;
 }
@@ -119,4 +130,8 @@ void Window::resetInput() {
 
 Vec2<float> Window::GetMousePos() {
 	return Vec2<float>(m_mouseX, m_mouseY);
+}
+
+double Window::GetMouseScroll(){
+	return m_mouseScroll;
 }

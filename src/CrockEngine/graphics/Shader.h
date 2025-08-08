@@ -7,7 +7,7 @@
 
 
 #include <glad/glad.h>
-#include "../../CrockMath/CrockMath.h"
+#include "CrockMath.h"
 #include "glm/glm.hpp"
 
 class Shader {

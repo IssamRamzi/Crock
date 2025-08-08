@@ -15,10 +15,10 @@ enum TextureType {
 };
 
 
-class Texture2D {
+class Texture {
 public:
-    Texture2D(const char* m_path);
-    ~Texture2D();
+    Texture(const char* m_path);
+    ~Texture();
 
     TextureType     m_type;
     GLuint          m_texture;
@@ -28,7 +28,7 @@ private:
     int             m_height, m_width, m_numColCh;
 
 public:
-    void            Bind(GLenum unit = GL_TEXTURE0);
+    void            Bind(GLuint unit);
     void            Unbind();
 
 };

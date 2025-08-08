@@ -2,12 +2,12 @@
 // Created by issbe on 09/06/2025.
 //
 
-#include "Texture2D.h"
+#include "Texture.h"
 #include "../utils/Utils.h"
 #include <iostream>
 
 
-Texture2D::Texture2D(const char *m_path) {
+Texture::Texture(const char *m_path) {
     std::string m_type = Utils::getFileExt(m_path).c_str();
     if (m_type == "png")
         this->m_type = TEXTURE_PNG;
@@ -19,7 +19,7 @@ Texture2D::Texture2D(const char *m_path) {
     if (m_bytes) {
         glGenTextures(1, &m_texture);
 
-        Bind();
+        Bind(30);
 
         // Texture Settings
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -47,15 +47,15 @@ Texture2D::Texture2D(const char *m_path) {
 
 }
 
-Texture2D::~Texture2D() {
+Texture::~Texture() {
     glDeleteTextures(1, &m_texture);
 }
 
-void Texture2D::Bind(GLenum unit) {
-    glActiveTexture(unit);
+void Texture::Bind(GLuint unit) {
+    glActiveTexture(GL_TEXTURE0 + unit);
     glBindTexture(GL_TEXTURE_2D, m_texture);
 }
 
-void Texture2D::Unbind() {
+void Texture::Unbind() {
     glBindTexture(GL_TEXTURE_2D, 0);
 }

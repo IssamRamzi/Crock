@@ -3,7 +3,7 @@
 // #include "graphics/buffers/Buffer.h"
 // #include "graphics/buffers/VertexArray.h"
 // #include "graphics/buffers/IndexBuffer.h"
-// #include "graphics/Texture2D.h"
+// #include "graphics/Texture.h"
 // #include <glm/glm.hpp>
 // #include <glm/gtc/matrix_transform.hpp>
 // #include <glm/gtc/type_ptr.hpp>
@@ -74,7 +74,7 @@
 // 	VAO->AddBuffer(VBO, 1, 2, 5*sizeof(float), (void*)(3 * sizeof(float)));
 
 // 	Shader shader("../src/CrockEngine/shaders/basic.vert", "../src/CrockEngine/shaders/basic.frag");
-// 	Texture2D wallTexture("wall.jpg");
+// 	Texture wallTexture("wall.jpg");
 // 	shader.EnableShader();
 // 	shader.SetUniform1i("texCoord", 0);
 // 	wallTexture.Bind();
